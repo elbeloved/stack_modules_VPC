@@ -1,6 +1,10 @@
-variable "AWS_ACCESS_KEY" {}
-variable "AWS_SECRET_KEY" {}
-variable "AWS_REGION" {}
+# variable "AWS_ACCESS_KEY" {}
+# variable "AWS_SECRET_KEY" {}
+# variable "AWS_REGION" {}
+
+variable "Region" {
+  default = "us-east-1"
+}
 
 variable "OwnerEmail" {
   default = "ayanfeafelumo@gmail.com"

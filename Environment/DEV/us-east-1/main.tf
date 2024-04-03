@@ -9,7 +9,7 @@ module "CORE-INFO" {
     OwnerEmail           = var.OwnerEmail,
     System               = var.System,
     Backup               = var.Backup,
-    Region               = var.AWS_REGION
+    Region               = var.Region
   }
 }
 
