@@ -1,27 +1,28 @@
 pipeline {
 	agent any
     environment {
-        PATH = "${PATH}:${getTerraformPath()}"
+        PATH    = "${PATH}:${getTerraformPath()}"
+        CONFIG  = "Environment/DEV/us-east-1/"
     }
     stages{
-        //  stage('terraform init'){
-        //     steps {
-        //         sh """
-        //             cd Environment/DEV/us-east-1/
-        //             terraform init -upgrade"""
-        //     }
-        // }
+         stage('terraform init'){
+            steps {
+                sh """
+                    cd ${CONFIG}
+                    terraform init -upgrade"""
+            }
+        }
         // stage('terraform plan'){
         //     steps {
         //         sh """
-        //             cd Environment/DEV/us-east-1/
+        //             cd ${CONFIG}
         //             terraform plan"""
         //     }
         // }
         stage('terraform apply'){
             steps {
                 sh """
-                    cd Environment/DEV/us-east-1/
+                    cd ${CONFIG}
                     terraform destroy -auto-approve"""
             }
         }
