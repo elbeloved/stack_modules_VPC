@@ -8,7 +8,7 @@ pipeline {
             steps {
                 sh """
                     cd Environment/DEV/us-east-1/
-                    terraform init"""
+                    terraform init -upgrade"""
             }
         }
         stage('terraform plan'){
