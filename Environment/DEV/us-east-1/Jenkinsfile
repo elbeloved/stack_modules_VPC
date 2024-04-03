@@ -22,7 +22,7 @@ pipeline {
             steps {
                 sh """
                     cd Environment/DEV/us-east-1/
-                    terraform destory -auto-approve"""
+                    terraform destroy -auto-approve"""
             }
         }
     }
