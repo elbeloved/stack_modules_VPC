@@ -18,6 +18,13 @@ pipeline {
                     terraform plan"""
             }
         }
+        stage('terraform apply'){
+            steps {
+                sh """
+                    cd Environment/DEV/us-east-1/
+                    terraform apply -auto-approve"""
+            }
+        }
     }
 }     
 
