@@ -6,14 +6,16 @@ pipeline {
     stages{
          stage('terraform init'){
             steps {
-                sh "terraform init"
+                sh """
+                    cd Environment/DEV/us-east-1/
+                    terraform init -upgrade"""
             }
         }
         stage('terraform plan'){
             steps {
                 sh """
                     cd Environment/DEV/us-east-1/
-                    terraform init -migrate-state"""
+                    terraform plan"""
             }
         }
     }
