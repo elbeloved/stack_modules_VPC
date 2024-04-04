@@ -27,13 +27,13 @@ echo "/dev/sdj /backup ext4 defaults,nofail 0 2" | sudo tee -a /etc/fstab  # Add
 
 #install packages
 sudo su -
-yum update -y
-yum install git -y
-amazon-linux-extras install -y lamp-mariadb10.2-php7.2 php7.2
-yum install -y httpd mariadb-server
-systemctl start httpd
-systemctl enable httpd
-systemctl is-enabled httpd
+# yum update -y
+# yum install git -y
+# amazon-linux-extras install -y lamp-mariadb10.2-php7.2 php7.2
+# yum install -y httpd mariadb-server
+# systemctl start httpd
+# systemctl enable httpd
+# systemctl is-enabled httpd
 
 if [ ! -d "${MOUNT_POINT}" ]; then
     mkdir -p ${MOUNT_POINT}
@@ -44,10 +44,10 @@ echo ${EFS_DNS}:/ ${MOUNT_POINT} nfs4 nfsvers=4.1,rsize=1048576,wsize=1048576,ha
 sudo mount -a
 
 ##add user to Apache group and grant permissions to /var/www
-usermod -a -G apache ec2-user
-chown -R ec2-user:apache /var/www
-chmod 2775 /var/www && find /var/www -type d -exec sudo chmod 2775 {} \;
-find /var/www -type f -exec sudo chmod 0664 {} \;
+# usermod -a -G apache ec2-user
+# chown -R ec2-user:apache /var/www
+# chmod 2775 /var/www && find /var/www -type d -exec sudo chmod 2775 {} \;
+# find /var/www -type f -exec sudo chmod 0664 {} \;
 cd ${MOUNT_POINT}
 sudo chmod -R 755 ${MOUNT_POINT}
 
@@ -66,10 +66,10 @@ DB_HOST=$(echo "${DB_HOST_NEW}" | sed 's/':3306'//g')
 sed -i "s/'wordpress-db.cc5iigzknvxd.us-east-1.rds.amazonaws.com'/'$${DB_HOST}'/g" /var/www/html/wp-config.php
 
 #grant file ownership of /var/www & its contents to apache user
-chown -R apache /var/www
+#chown -R apache /var/www
 
 #grant group ownership of /var/www & contents to apache group
-chgrp -R apache /var/www
+#chgrp -R apache /var/www
 
 #change directory permissions
 chmod 2775 /var/www

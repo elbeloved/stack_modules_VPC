@@ -35,7 +35,7 @@ pipeline {
                 script{
                     def userInput = input(id: 'confirm', message: 'Apply Terraform?', parameters: [ [$class: 'BooleanParameterDefinition', defaultValue: true, description: 'Apply terraform', name: 'confirm'] ])
                 }
-                slackSend (color: '#FFFF00', message: "DEPLOYMENT APPROVED by: ${RUNNER}' ${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+                slackSend (color: '#FFFF00', message: "PLAN APPROVED by: ${RUNNER}' ${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
             }
         }
         stage('Terraform Final Action'){
@@ -47,7 +47,7 @@ pipeline {
                     cd ${CONFIG}
                     terraform ${ACTION} --auto-approve"""
 
-                slackSend (color: '#FFFF00', message: "${ACTION} SUCCESSFUL: Job by ${RUNNER}' ${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+                slackSend (color: '#FFFF00', message: "terraform ${ACTION} SUCCESSFUL: Job by ${RUNNER}' ${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
             }
         }
      }
