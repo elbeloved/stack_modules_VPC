@@ -87,22 +87,22 @@ resource "aws_launch_template" "takeoff" {
 
   tags    = merge({Name  = "${local.ServerPrefix != "" ? local.ServerPrefix : "AWS_Launch_Temp"}"}, var.required_tags)
 
-  }
-
-
-data "aws_route53_zone" "clixx" {
-  name    = var.hosted_zone
 }
 
-resource "aws_route53_record" "clixx" {
-  zone_id = data.aws_route53_zone.clixx.zone_id
-  name    = "hewitech.click"
-  type    = "A"
-  ttl     = "300"
-  records = [module.vpc-us-east-1.address]
-  latency_routing_policy {
-    region = "us-east-1"
-  }
-}
+
+# data "aws_route53_zone" "clixx" {
+#   name    = var.hosted_zone
+# }
+
+# resource "aws_route53_record" "clixx" {
+#   zone_id = data.aws_route53_zone.clixx.zone_id
+#   name    = "hewitech.click"
+#   type    = "A"
+#   ttl     = "300"
+#   records = [module.vpc-us-east-1.address]
+#   latency_routing_policy {
+#     region = "us-east-1"
+#   }
+# }
 
  
