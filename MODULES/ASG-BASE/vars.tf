@@ -6,19 +6,6 @@ variable "project" {
   default = "Clixx"
 }
 
-# variable "PATH_TO_PRIVATE_KEY" {
-#   default = "my_key"
-# }
-
-# variable "PATH_TO_PUBLIC_KEY" {
-#   default = "my_key.pub"
-# }
-
-# variable "subnet_ids" {
-#   type = list(string)
-#   default = []
-# }
-
 variable "stack_controls" {
   type = map(string)
   default = {}
@@ -110,4 +97,6 @@ variable "public_subnet" {
 variable "public_subnet_1b" {
   default = ""
 }
+
+variable "hosted_zone" {}
 
