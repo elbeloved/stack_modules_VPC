@@ -3,7 +3,7 @@ pipeline {
     environment {
         PATH    = "${PATH}:${getTerraformPath()}"
         CONFIG  = "Environment/DEV/us-east-1/"
-        ACTION  = "apply"
+        ACTION  = "destroy"
         RUNNER  = "Ayanfe"
     }
     stages{
@@ -40,12 +40,14 @@ pipeline {
         }
         stage('Terraform Final Action'){
             steps {
+                slackSend (color: '#FFFF00', message: "PERFORMING TERRAFORM ${ACTION}: Job by ${RUNNER}' ${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+
                 script{stage("Performing Terraform ${ACTION}")}
                 sh """
                     cd ${CONFIG}
                     terraform ${ACTION} --auto-approve"""
 
-                slackSend (color: '#FFFF00', message: "FINAL ACTION ${ACTION} by: ${RUNNER}' ${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+                slackSend (color: '#FFFF00', message: "${ACTION} SUCCESSFUL: Job by ${RUNNER}' ${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
             }
         }
      }
