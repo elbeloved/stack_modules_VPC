@@ -27,7 +27,7 @@ pipeline {
                 slackSend (color: '#FFFF00', message: "Starting Terraform Plan: Job by ${RUNNER}' ${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
                 sh """
                     cd ${CONFIG}
-                    terraform plan -out=tfplan -input=false"""
+                    terraform plan"""
             }
         }
         stage('Final Deployment Approval'){
