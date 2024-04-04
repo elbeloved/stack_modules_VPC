@@ -44,8 +44,8 @@ pipeline {
 //                     terraform destroy -auto-approve"""
 //             }
 //         }
-//     }
-// }     
+     }
+}     
 
 
 def getTerraformPath(){
