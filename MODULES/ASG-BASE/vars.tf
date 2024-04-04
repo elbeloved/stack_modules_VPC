@@ -98,5 +98,5 @@ variable "public_subnet_1b" {
   default = ""
 }
 
-variable "hosted_zone" {}
+# variable "hosted_zone" {}
 
