@@ -3,7 +3,7 @@ pipeline {
     environment {
         PATH    = "${PATH}:${getTerraformPath()}"
         CONFIG  = "Environment/DEV/us-east-1/"
-        ACTION  = "destroy"
+        ACTION  = "apply"
         RUNNER  = "Ayanfe"
     }
     stages{
@@ -16,7 +16,7 @@ pipeline {
         }
        stage('terraform init'){
              steps {
-                slackSend (color: '#FFFF00', message: "STARTED: Job by ${RUNNER}' ${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+                slackSend (color: '#FFFF00', message: "STARTED INIT: Job by ${RUNNER}' ${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
                 sh """
                     cd ${CONFIG}
                     terraform init -upgrade"""
@@ -24,7 +24,7 @@ pipeline {
         }
         stage('terraform plan'){
             steps {
-                slackSend (color: '#FFFF00', message: "Starting Terraform Plan: Job by ${RUNNER}' ${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+                slackSend (color: '#FFFF00', message: "STARTED PLAN: Job by ${RUNNER}' ${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
                 sh """
                     cd ${CONFIG}
                     terraform plan"""
@@ -35,7 +35,7 @@ pipeline {
                 script{
                     def userInput = input(id: 'confirm', message: 'Apply Terraform?', parameters: [ [$class: 'BooleanParameterDefinition', defaultValue: true, description: 'Apply terraform', name: 'confirm'] ])
                 }
-                slackSend (color: '#FFFF00', message: "Plan Approved by: ${RUNNER}' ${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+                slackSend (color: '#FFFF00', message: "DEPLOYMENT APPROVED by: ${RUNNER}' ${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
             }
         }
         stage('Terraform Final Action'){
@@ -44,6 +44,8 @@ pipeline {
                 sh """
                     cd ${CONFIG}
                     terraform ${ACTION} --auto-approve"""
+
+                slackSend (color: '#FFFF00', message: "FINAL ACTION ${ACTION} by: ${RUNNER}' ${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
             }
         }
      }
