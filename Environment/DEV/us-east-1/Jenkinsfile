@@ -3,7 +3,7 @@ pipeline {
     environment {
         PATH    = "${PATH}:${getTerraformPath()}"
         CONFIG  = "Environment/DEV/us-east-1/"
-        ACTION  = "destroy"
+        ACTION  = "apply"
         RUNNER  = "Ayanfe"
     }
     stages{
