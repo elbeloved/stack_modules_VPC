@@ -46,6 +46,7 @@ resource "aws_lb_target_group" "balance" {
   protocol               = var.LTG_Components["protocol"]
   vpc_id                 = var.vpc_id
   target_type            = "ip"
+  
 
   # health_check {
   #   matcher              = var.LTG_Components["matcher"]
