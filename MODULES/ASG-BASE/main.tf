@@ -67,7 +67,7 @@ resource "aws_lb_listener" "front_end" {
 }
 
 resource "aws_launch_template" "takeoff" {
-  depends_on = [aws_iam_instance_profile.ecs_node ]
+  depends_on = [aws_iam_instance_profile.ecs_node]
   name                   = "${var.project}-LT"
   image_id               = var.ECS-ami
   instance_type          = var.EC2_Components["instance_type"]
