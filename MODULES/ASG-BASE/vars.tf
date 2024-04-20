@@ -1,5 +1,9 @@
 variable "ami_id"{}
 
+variable "ECS-ami" {
+  default = "ami-021fe45d6043e82c8"
+}
+
 variable "env" {}
 
 variable "project" {
@@ -98,5 +102,12 @@ variable "public_subnet_1b" {
   default = ""
 }
 
-# variable "hosted_zone" {}
+# variable "instance_profile" {}
 
+variable "path" {}
+
+variable "instance_role" {}
+
+variable "ECS-Components" {
+  type = map(string)
+}

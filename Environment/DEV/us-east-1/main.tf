@@ -62,7 +62,10 @@ module "ASG-BASE" {
   private_subnet         = module.VPC-BASE[*].private_subnet
   private_subnet_1b      = module.VPC-BASE[*].private_subnet_1b
   block_device_config    = var.block_device_config
-  user_data_filepath     = data.template_file.bootstrap.rendered
+  user_data_filepath     = data.template_file.ECSbootstrap.rendered
+  path                   = var.path
+  instance_role          = var.instance_role
+  ECS-Components         = var.ECS-Components
 }
 
 module "RDS-BASE" {
@@ -88,4 +91,22 @@ module "EFS-BASE" {
   vpc_id                 = module.VPC-BASE[*].stack_vpc_id
   private_subnet         = module.VPC-BASE[*].private_subnet[0]
   private_subnet_1b      = module.VPC-BASE[*].private_subnet_1b[0]
+}
+
+module "ECS-BASE" {
+   count                  = var.stack_controls["ecs_create"] == "Y" ? 1 : 0
+   source                 = "../../../MODULES/ECS-BASE"
+   cpu                    = var.cpu
+   host_port              = var.host_port
+   container_port         = var.container_port
+   memory_container       = var.memory_container
+   target_group           = module.ASG-BASE[0].target_group
+   memory                 = var.memory
+   instance_role          = var.instance_role
+   instance_type          = var.instance_type
+   instance_count         = var.instance_count
+   repo_name              = var.repo_name
+   image_tag              = var.image_tag
+   ECS-Components         = var.ECS-Components
+   autoscaling            = module.ASG-BASE[0].autoscaling
 }

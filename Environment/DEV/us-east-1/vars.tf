@@ -53,12 +53,13 @@ variable "AMIS" {
 variable "stack_controls" {
   type = map(string)
   default = {
-    ec2_create = "Y"
+    ec2_create = "N"
     rds_create = "Y"
     sg_create  = "Y"
     asg_create = "Y"
-    efs_create = "Y"
+    efs_create = "N"
     vpc_create = "Y"
+    ecs_create = "Y"
   }
 }
 
@@ -69,7 +70,7 @@ variable "EC2_Components" {
     volume_size           = 30
     delete_on_termination = true
     encrypted             = "true"
-    instance_type         = "t2.micro"
+    instance_type         = "t2.medium"
   }
 }
 
@@ -87,8 +88,8 @@ variable "ASG_Components" {
 variable "LTG_Components" {
   type = map(string)
   default = {
-    port                = 80
-    protocol            = "HTTP"
+    port                = 8000
+    protocol            = "TCP"
     matcher             = 200
     path                = "/"
     interval            = 30
@@ -138,7 +139,8 @@ variable "most_recent" {
 variable "snapshot_identifier" {
   description = "db snapshot name"
   type        = string
-  default     = "arn:aws:rds:us-east-1:577701061234:snapshot:wordpressdbclixx-ecs-snapshot"
+  #default     = "arn:aws:rds:us-east-1:577701061234:snapshot:wordpressdbclixx-ecs-snapshot"
+  default     = "arn:aws:rds:us-east-1:533267419089:snapshot:dockerwordpress"
 }
 
 variable "access_ports" {
@@ -181,9 +183,64 @@ variable "block_device_config" {
 }
 
 variable "subnet_availability_zone" {
-    default     = "us-east-1a"
+  default     = "us-east-1a"
 }
 
 variable "subnet_availability_zone_1b" {
-    default     = "us-east-1b"
+  default     = "us-east-1b"
+}
+
+variable "instance_role" {
+  default     = "ecsTaskExecutionRole"
+}
+
+variable "cpu" {
+  default = 1024
+}
+
+variable "host_port" {
+  default = 8000
+}
+
+variable "container_port" {
+  default = 80
+}
+
+variable "memory_container" {
+  default = 2048
+}
+
+variable "memory" {
+  default = 3072
+}
+
+variable "instance_type" {
+  default = "EC2"  
+}
+
+variable "instance_count" {
+  default = 2
+}
+
+variable "path" {
+  default = "/ecs/instance"
+}
+
+variable "ECS-Components" {
+  type = map(string)
+  default = {
+    max_scaling   =  2
+    min_scaling   =  1
+    target_cap    =  100
+    base          =  1
+    weight        =  100
+  }
+}
+
+variable "repo_name" {
+    default = "clixx-repository"
+}
+
+variable "image_tag" {
+    default = "clixx-img-1.0"
 }
