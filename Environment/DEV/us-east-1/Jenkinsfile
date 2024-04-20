@@ -3,7 +3,7 @@ pipeline {
     environment {
         PATH    = "${PATH}:${getTerraformPath()}"
         CONFIG  = "Environment/DEV/us-east-1/"
-        ACTION  = "destroy"
+        ACTION  = "apply"
         RUNNER  = "Ayanfe"
     }
     stages{
@@ -19,7 +19,7 @@ pipeline {
                 slackSend (color: '#FFFF00', message: "STARTED INIT: Job by ${RUNNER}' ${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
                 sh """
                     cd ${CONFIG}
-                    terraform init -migrate-state"""
+                    terraform init"""
              }
         }
         stage('Terraform Plan'){
