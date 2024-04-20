@@ -19,7 +19,7 @@ pipeline {
                 slackSend (color: '#FFFF00', message: "STARTED INIT: Job by ${RUNNER}' ${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
                 sh """
                     cd ${CONFIG}
-                    terraform init -upgrade"""
+                    terraform init -migrate-state"""
              }
         }
         stage('Terraform Plan'){
