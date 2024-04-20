@@ -223,7 +223,7 @@ variable "instance_count" {
 }
 
 variable "path" {
-  default = "/ecs/instance"
+  default = "/ecs/instance/"
 }
 
 variable "ECS-Components" {
