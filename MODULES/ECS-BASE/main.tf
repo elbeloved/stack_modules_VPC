@@ -22,7 +22,7 @@ resource "aws_ecs_task_definition" "stack" {
     execution_role_arn       = data.aws_iam_role.stack.arn
     cpu                      = var.cpu
     memory                   = var.memory
-    network_mode             = "awsvpc"
+    
 
     container_definitions = jsonencode([
         {
