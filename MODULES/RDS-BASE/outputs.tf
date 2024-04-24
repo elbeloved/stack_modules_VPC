@@ -4,7 +4,7 @@ output "endpoint" {
 }
 
 output "id" {
-  description = " The RDS instance ID.."
+  description = "The RDS instance ID"
   value       = aws_db_instance.stack.id
 }
 
