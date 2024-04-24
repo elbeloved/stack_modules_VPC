@@ -3,7 +3,7 @@ pipeline {
     environment {
         PATH    = "${PATH}:${getTerraformPath()}"
         CONFIG  = "Environment/DEV/us-east-1/"
-        ACTION  = "apply"
+        ACTION  = "destroy"
         RUNNER  = "Ayanfe"
     }
     stages{
@@ -58,6 +58,3 @@ def getTerraformPath(){
     def tfHome= tool name:'terraform-40',type:'terraform'
     return tfHome
 }
-       
-
-
