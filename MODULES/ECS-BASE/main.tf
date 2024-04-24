@@ -3,7 +3,7 @@ resource "aws_ecs_cluster" "stack" {
 }
 
 resource "aws_ecs_service" "service" {
-    depends_on = [var.target_group]
+    depends_on = [var.lb_listener]
     name            = "${var.project}-service"
     cluster         = aws_ecs_cluster.stack.name
     launch_type     = var.instance_type

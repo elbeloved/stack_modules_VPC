@@ -35,3 +35,5 @@ variable "image_tag" {}
 variable "autoscaling" {
     type = string
 }
+
+variable "lb_listener" {}

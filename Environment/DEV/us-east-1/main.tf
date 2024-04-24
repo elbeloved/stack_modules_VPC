@@ -109,4 +109,5 @@ module "ECS-BASE" {
    image_tag              = var.image_tag
    ECS-Components         = var.ECS-Components
    autoscaling            = module.ASG-BASE[0].autoscaling
+   lb_listener            = module.ASG-BASE.listener
 }

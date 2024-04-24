@@ -14,3 +14,7 @@ output "target_group" {
 output "autoscaling" {
   value        = aws_autoscaling_group.scale.arn
 }
+
+output "listener" {
+  value        = aws_lb_listener.front_end.id
+}
