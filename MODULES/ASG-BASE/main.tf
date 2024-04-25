@@ -33,7 +33,7 @@ resource "aws_autoscaling_group" "scale" {
     delete  = "3m"
   }
 
-  #target_group_arns      = [aws_lb_target_group.balance.arn]
+  target_group_arns      = [aws_lb_target_group.balance.arn]
 }
 
 resource "aws_lb" "balance" {
