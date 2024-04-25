@@ -11,7 +11,7 @@ variable "access_ports" {
 
 variable "access_ports_priv" {
   type    = list(number)
-  default = [80, 22, 3306, 2049] 
+  default = [ ] 
 }
 
 variable "required_tags"{
